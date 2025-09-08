@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 const app = express();
 
@@ -20,3 +21,17 @@ const server = http.createServer(app);
 server.listen(8080, () => {
     console.log('Server running on http://localhost:8080/');
 });
+
+const MONGO_URL = 'mongodb+srv://dannyjung:dannyjung@cluster0.b1gqj94.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
+async function connectDB() {
+    try {
+        await mongoose.connect(MONGO_URL);
+        console.log('MongoDB connected successfully');
+    } catch (err) {
+        console.error('MongoDB connection error:', err);
+        process.exit(1);
+    }
+}
+
+connectDB();
