@@ -39,3 +39,5 @@ async function connectDB() {
 }
 
 connectDB();
+
+app.use('/', router());
